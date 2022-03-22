@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Product } from 'src/app/Model/product.module';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -8,7 +9,7 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products?: Product[];
+  products$: Observable<Product[]> | null=null;
 
   constructor(private productService: ProductsService) { }
 
@@ -16,11 +17,7 @@ export class ProductsComponent implements OnInit {
   }
 
   onGetAllProducts(){
-    this.productService.getAllProducts().subscribe(data=>{
-      this.products=data;
-    },err=>{
-      console.log(err);
-    })
+    this.products$ = this.productService.getAllProducts();
   }
 
 }

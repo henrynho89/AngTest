@@ -11,12 +11,12 @@
     </li>
   </ul>
 </nav>
-<div class="container" *ngIf="products">
+<div class="container" *ngIf="products$">
   <table class="table">
     <tr>
       <th>ID</th><th>Price</th><th>Title</th><th>Selected</th><th>Available</th>
     </tr>
-    <tr *ngFor="let p of products">
+    <tr *ngFor="let p of products$ | async">
       <td>{{p.id}}</td>
       <td>{{p.price}}</td>
       <td>{{p.title}}</td>
